@@ -1,5 +1,5 @@
 cabal-version:      3.0
-name:               plutus-starter
+name:               contracts 
 version:            0.1.0.0
 
 -- A short (one-line) description of the package.
@@ -41,7 +41,7 @@ common lang
 library
     import: lang
     exposed-modules:
-      MyModule
+      Voucher
       Plutus.Contracts.Game
     build-depends:
       base >= 4.9 && < 5,
@@ -57,9 +57,23 @@ library
       plutus-tx -any,
       plutus-tx-plugin -any,
       plutus-script-utils -any,
+      plutus-use-cases -any,
+      prettyprinter -any,
       text -any,
       lens -any,
     hs-source-dirs: src examples/src
+    default-extensions:
+      DeriveFoldable
+      DeriveFunctor
+      DeriveGeneric
+      DeriveLift
+      DeriveTraversable
+      ExplicitForAll
+      GeneralizedNewtypeDeriving
+      ImportQualifiedPost
+      MultiParamTypeClasses
+      ScopedTypeVariables
+      StandaloneDeriving
 
 test-suite plutus-example-projects-test
   import: lang
@@ -74,7 +88,7 @@ test-suite plutus-example-projects-test
     plutus-contract -any,
     plutus-pab -any,
     plutus-ledger -any,
-    plutus-starter -any
+    contracts -any
   build-depends:
     base >=4.9 && <5,
     tasty -any,
@@ -83,7 +97,7 @@ test-suite plutus-example-projects-test
     tasty-hedgehog >=0.2.0.0
 
 
-executable plutus-starter-pab
+executable contracts-pab
   import: lang
   main-is: Main.hs
   hs-source-dirs: pab
@@ -94,7 +108,7 @@ executable plutus-starter-pab
     data-default -any,
     plutus-contract -any,
     plutus-pab -any,
-    plutus-starter -any,
+    contracts -any,
     aeson -any,
     freer-simple -any,
     prettyprinter -any,
